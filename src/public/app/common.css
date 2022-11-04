@@ -71,3 +71,6 @@ body{
     text-decoration: none;
 
 }
+
+ nav ul{height:6rem; width:18rem;}
+nav ul{ overflow:hidden; overflow-y:scroll;scrollbar-width: none;} 

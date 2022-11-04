@@ -9,8 +9,9 @@ let currentUser = window.localStorage.user ? JSON.parse(window.localStorage.user
 
 $("#submitBtn").click(function () {
   
+  
 
-  $.post(  '/api/posts', { userId: currentUser.id , title: ptitle.value ,body: pbody.value,username: currentUser.username } )
+  $.post('/api/posts', { userId: currentUser.id , title: ptitle.value ,body: pbody.value,username: currentUser.username } )
   .done(function() {
     alert( "Post added successfully" );
   })

@@ -7,6 +7,8 @@ const {
 } = require('../../controllers/users')
 
 const route = Router()
+
+
 //When a get request is made to '/:id' the users from DB is shown
 route.get('/:userid', async (req,res) =>{
     let user;
@@ -31,6 +33,8 @@ route.get('/:userid', async (req,res) =>{
         })
     }
 })
+
+
 //When a Post request is made to '/' then a new user is created
 route.post('/', async (req,res) =>{
     const user= await createAnonUser()

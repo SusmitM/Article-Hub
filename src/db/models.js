@@ -1,11 +1,24 @@
 const {Sequelize}= require('sequelize');
-const db =new Sequelize({
-   
-    dialect: 'mysql',
-    database:'mocksocial',
-    username:'myuser',
-    password:'mypass'
-});
+
+let db   
+ if(process.env.NODE_ENV =='testing'){
+    db = new Sequelize({
+        dialect:'mysql',
+        database:'mocksocial',
+        username:'myuser',
+        password:'mypass'
+    })
+ }
+ else{
+    db =new Sequelize({
+        dialect: 'mysql',
+        database:'mocksocial',
+        username:'myuser',
+        password:'mypass'
+    });
+    
+ }
+
 //CREATING TABLES IN THE Database with the fields => user,post,comment
 const COL_ID_DEF ={
     type: Sequelize.DataTypes.INTEGER,
@@ -42,12 +55,7 @@ const Comments =db.define('comment',{
     id: COL_ID_DEF,
     title:{
         type: Sequelize.DataTypes.STRING(140),
-        allowNull:false,
-    },
-    body: {
-        type: Sequelize.DataTypes.TEXT('tiny'),
-       
-    },
+        allowNull:false,  },
 })
 //Making connection within the table fields
 Users.hasMany(Posts)
