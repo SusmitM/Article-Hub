@@ -11,7 +11,7 @@ function loadPosts() {
                <h5 class="card-title">${p.title}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">By- ${p.user.username}</h6>
                  <p class="card-text"> ${p.body.substr(0,200)} 
-                 <a href="#">...Read more</a></p>
+                 <a class ="btnReadMore" href="#">...Read more</a></p>
                   <a hidden href="#" class="card-link">Comment</a>
                    <a hidden  href="#" class="card-link">like</a>
                
@@ -27,6 +27,8 @@ function loadPosts() {
                  </div> 
                  </div>
                 `);
+
+                
 
             let commentBox = item.find(".comment")
             $.get('/api/comments', {}, (comments) => {
@@ -57,7 +59,6 @@ function loadPosts() {
                     }
                 );
             });
-
 
             $('.posts-container').append(item);
         }

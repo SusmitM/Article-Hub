@@ -5,11 +5,8 @@ function myPosts() {
 
     $.get('/api/posts', {}, (posts) => {
         for (let p of posts) {
-            if (p.user.username == currentUser.username) {
-                $('.posts-container').append(
-                    $(`
-                    
-                    <div class="col-4">
+            let item = $(`
+                   <div class="col-4">
                     <div class="card m-2" style="width: 22rem;">
                    <div class="card-body">
                    <h5 class="card-title">${p.title}</h5>
@@ -20,32 +17,50 @@ function myPosts() {
                       <a hidden  href="#" class="card-link">Comment</a>
                       <a hidden  href="#" class="card-link">like</a>
                       <hr>
-
-                      <input  style="width: 15rem; margin-bottom:1rem " name="comment" placeholder="Enter Comments...">
-                      <button type="submit" style="width: 3rem; padding:0rem; margin:0rem">Post</button>
+                      <input class="newComment" style="width: 15rem; margin-bottom:1rem " placeholder="Enter Comments...">
+                      <button class="btnComment" style="width: 3rem; padding:0rem; margin:0rem">Post</button>
                       
                       <nav  style="border: 0.1rem solid black">
-                      <ul>
-                          <li>Link 1 this is a ssamole comment to test the width of the post</li>
-                          <li>Link 2</li>
-                          <li>Link 3</li>
-                          <li>Link 4</li>
-                          <li>Link 5</li>
-                          <li>Link 6</li>
-          
-                      </ul>
+                      <ul class="comment"></ul>
                   </nav>
                            </div>
                            </div> 
                            </div>
                     `)
-                )
+
+
+
+            let commentBox = item.find(".comment")
+            $.get('/api/comments', {}, (comments) => {
+                for (let c of comments) {
+                    if (p.id === c.postId) {
+                        commentBox.append(
+                            $("<li></li>").text(`[${c.user.username}] : ${c.title}`)
+                        );
+                    }
+                }
+            })
+
+            item.find(".btnComment").on("click", () => {
+                $.post("/api/comments", {
+                        userId: currentUser.id,
+                        postId: p.id,
+                        title: item.find(".newComment").val()
+                    },
+                    (comment) => {
+                        $("#content").load("./components/all-posts.html");
+                    }
+                );
+            });
+
+            if (p.user.username === currentUser.username) {
+                $('.posts-container').append(item);
             }
-            
 
-                
 
-            
+
+
+
 
         }
 
