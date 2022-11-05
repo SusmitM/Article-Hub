@@ -1,6 +1,6 @@
 function loadPosts() {
 
-
+   //GET POST FROM DB
     $.get('/api/posts', {}, (posts) => {
         for (let p of posts) {
 
@@ -11,12 +11,8 @@ function loadPosts() {
                <h5 class="card-title">${p.title}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">By- ${p.user.username}</h6>
                  <p class="card-text"> ${p.body.substr(0,200)} 
-                 <a class ="btnReadMore" href="#">...Read more</a></p>
-                  <a hidden href="#" class="card-link">Comment</a>
-                   <a hidden  href="#" class="card-link">like</a>
-               
+                 <button class ="btnReadMore btn btn-link">Read more</button></p>
                    <hr>
-
                    <input  style="width: 15rem; margin-bottom:1rem " class="newComment" placeholder="Enter Comments...">
                    <button class="btnComment" style="width: 3rem; padding:0rem; margin:0rem">Post</button>
                    
@@ -28,8 +24,14 @@ function loadPosts() {
                  </div>
                 `);
 
-                
+                //READ MORE FUNCTION
+            let cardText = item.find(".card-text");
+            item.find(".btnReadMore").on("click", () => {
 
+                cardText.text(p.body);
+            })
+            
+            //GET COMMENTS FROM DB
             let commentBox = item.find(".comment")
             $.get('/api/comments', {}, (comments) => {
                 for (let c of comments) {
@@ -43,10 +45,7 @@ function loadPosts() {
                 }
             })
 
-
-
-
-
+            //POST COMMENTS TO DB
             item.find(".btnComment").on("click", () => {
                 $.post("/api/comments", {
                         userId: JSON.parse(window.localStorage.user).id,
@@ -60,6 +59,7 @@ function loadPosts() {
                 );
             });
 
+            //APPEND item TO post-container
             $('.posts-container').append(item);
         }
     })

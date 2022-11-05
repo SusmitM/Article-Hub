@@ -11,7 +11,7 @@ $("#submitBtn").click(function () {
   
   
 
-  $.post('/api/posts', { userId: currentUser.id , title: ptitle.value ,body: pbody.value,username: currentUser.username } )
+  $.post('/api/posts', { userId: currentUser.id , title: ptitle.value ,body: pbody.value} )
   .done(function() {
     alert( "Post added successfully" );
   })
