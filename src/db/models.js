@@ -1,23 +1,24 @@
 const {Sequelize}= require('sequelize');
 
-let db   
- if(process.env.NODE_ENV =='testing'){
-    db = new Sequelize({
-        dialect:'mysql',
-        database:'mocksocial',
-        username:'myuser',
-        password:'mypass'
-    })
- }
- else{
-    db =new Sequelize({
-        dialect: 'mysql',
-        database:'mocksocial',
-        username:'myuser',
-        password:'mypass'
-    });
+// DB setup of localhost
+
+// jdbc:mysql://sql12.freesqldatabase.com:3306/sql12577921
+// let db =new Sequelize({
+//         dialect:'mysql',
+        // database:'mocksocial',
+        // username:'myuser',
+        // password:'mypass'
+//     });
+
+
+// DB setup of Onlinehost
+const db = new Sequelize('sql12577921','sql12577921','WsKwWueYcC',{
+    host: 'sql12.freesqldatabase.com',
+    dialect: 'mysql',
+
+});
     
- }
+ 
 
 //CREATING TABLES IN THE Database with the fields => user,post,comment
 const COL_ID_DEF ={
