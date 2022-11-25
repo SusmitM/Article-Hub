@@ -12,8 +12,8 @@ const {Sequelize}= require('sequelize');
 
 
 // DB setup of Onlinehost
-const db = new Sequelize('sql12577921','sql12577921','WsKwWueYcC',{
-    host: 'sql12.freesqldatabase.com',
+const db = new Sequelize('bd02wnzkcuaiivyfttei','ugipxznqtmmvrvou','846QPmToRaa6xQpfxRZG',{
+    host: 'bd02wnzkcuaiivyfttei-mysql.services.clever-cloud.com',
     dialect: 'mysql',
 
 });
