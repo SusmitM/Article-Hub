@@ -5,7 +5,7 @@ function loadPosts() {
         for (let p of posts) {
 
             let item = $(`
-                <div class="col-4">
+                <div class="col-4" style="  flex: max-content; width: 0%;">
                 <div class="card m-2" style="width: 22rem;">
                <div class="card-body">
                <h5 class="card-title">${p.title}</h5>

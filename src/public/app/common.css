@@ -17,10 +17,7 @@ body{
     z-index: 1;
 }
 
-.col-4{
-    flex: max-content;
-    width: 0%;
-}
+
 #footer {
     margin-top: auto;
 }
